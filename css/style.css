@@ -23,6 +23,14 @@ body, html, head,div{
     float: right;
     border:1px solid black;
 }
+#location{
+    position: absolute;
+    top:100px;
+    left:100px;
+    z-index: 1000;
+    padding: 5px 10px;
+    font-size: 16px;
+}
 
 
 .clear{

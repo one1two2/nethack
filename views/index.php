@@ -4,7 +4,7 @@
         <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
         <script src="js/map.js"></script>
         <script type="text/javascript"
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYMaScAZ6rluB4cgD__IZkIWMMIMxJFZ0&sensor=true">
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYMaScAZ6rluB4cgD__IZkIWMMIMxJFZ0&sensor=true&libraries=places">
         </script>
     </head> 
     
@@ -43,14 +43,14 @@
     </script>
         
         <div id="page">
+            <input type='text' name='location' value='' id='location'/>
+        
+            <div id="map">
 
-
-        <div id="map">
-
-        </div>
-        <div id="panel">
-            <div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="true"></div>
-        </div>
+            </div>
+            <div id="panel">
+                <div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="true"></div>
+            </div>
         <div class="clear"></div>
     </div>
     </body>
