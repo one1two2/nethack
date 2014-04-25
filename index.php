@@ -13,12 +13,8 @@ $user_id = $facebook->getUser();
 //var_dump($user_id);
     
 if($user_id) {
-    try {
-        $user_profile = $facebook->api('/me','GET');
-      } catch(FacebookApiException $e) {
-        error_log($e->getType());
-        error_log($e->getMessage());
-      }   
+    $user = new user($user_id,$facebook);
+    //var_dump($user);
 }
 
 include 'views/index.php';

@@ -12,6 +12,7 @@
  * @author dominik
  */
 include 'config/mysql.php';
+include 'datatypes/user.php';
 
 mysql_connect(MYSQL_HOST, MYSQL_LOGIN, MYSQL_PASS);
 mysql_select_db(MYSQL_DB);
