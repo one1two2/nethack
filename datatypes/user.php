@@ -23,9 +23,10 @@ class user {
     function __construct($uid,$facebook){
         
         $sql = 'SELECT * FROM user WHERE uid='.$uid.'';
-        echo $sql;
         $result = mysql_query($sql);
-        if($row = mysql_fetch_array($result)){
+        $num_rows = mysql_num_rows($result);
+        if($num_rows === 0){
+            $row = mysql_fetch_array($result);
             $this->uid = $row['uid'];
             $this->location_id = $row['location_id'];
             $this->date_registred = $row['date_registred'];
