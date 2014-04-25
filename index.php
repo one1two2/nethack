@@ -1,5 +1,5 @@
 <?php
-
+require 'init.php';
 require ('facebook-sdk/src/facebook.php');
     
 $config = array(
