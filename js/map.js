@@ -1,9 +1,13 @@
 (function( $ ) {
+    
+    
  
     $.fn.map = function() {
         
         var map;
         var autocomplete;
+        var markers=[];
+        var infobox=new InfoBox();
  
         function initialize() {
         var mapOptions = {
@@ -47,13 +51,52 @@
                 }
             });
         }
-        google.maps.event.addDomListener(window, 'load', initialize);
         
+        function getEvents(){
+            var request=$.ajax({
+                url: "ajax/events.php",
+                dataType: "json"
+            });
+            
+            request.done(function (response){
+                console.log(response);
+                
+                for(var i=0;i<response.length;i++){
+                    var marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(response[i].latitude,response[i].longitude),
+                        map: map,
+                        title: response[i].name
+                    });
+                    marker.clickMarker(response[i]);
+                    //markerClick(response[i]);
+                    
+                    markers.push(marker);
+                }
+                
+                
+            });
+        }
         
-          
+        function markerClick(response){
+           
+        }
+        
+        google.maps.Marker.prototype.clickMarker=function(response){
+            google.maps.event.addListener(this, 'click', function() {
+                var options={
+                    content: response.name
+                };
+                
+                infobox.setOptions(options);
+                infobox.open(map,this);      
+            });
+            
+        }
          
         
+        google.maps.event.addDomListener(window, 'load', initialize);
         
+        getEvents();
         
         return this;
  

@@ -2,10 +2,12 @@
     <head>
         <link rel="stylesheet" href="css/style.css" />
         <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-        <script src="js/map.js"></script>
         <script type="text/javascript"
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYMaScAZ6rluB4cgD__IZkIWMMIMxJFZ0&sensor=true&libraries=places">
         </script>
+        <script src="js/infobox_packed.js"></script>
+        <script src="js/map.js"></script>
+        
     </head> 
     
     
