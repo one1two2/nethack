@@ -34,6 +34,7 @@
         });
         FB.Event.subscribe('auth.logout', function(response) {
           window.location.reload();
+          <?php session_destroy(); ?>
         });
       };
       (function() {
