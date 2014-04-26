@@ -11,6 +11,7 @@
  *
  * @author dominik
  */
+
 include 'config/mysql.php';
 include 'datatypes/user.php';
 
@@ -21,6 +22,8 @@ mysql_query('set names utf8');
 
 
 function getView($view,$params=array()){
+    mb_internal_encoding("UTF-8");
+    mb_http_output( "UTF-8" );
     ob_start();
     include PATH.'views/'.$view.'.php';
     return ob_get_clean();
