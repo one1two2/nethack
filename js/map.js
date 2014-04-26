@@ -19,6 +19,12 @@
                 return false;
             });
         });
+        $( document ).ready(function() {
+            $events.on("click",'a.wiecej',function(){
+                getEvent($(this).attr('eid'));
+                return false;
+            });
+        });
         
         function Marker(){
             var markers={};
@@ -136,10 +142,7 @@
         
         google.maps.Marker.prototype.clickMarker=function(response){
             google.maps.event.addListener(this, 'click', function() {
-                $.get( "ajax/event.php",{ eid:response.eid }, function( data ) {
-                    $event.show();
-                    $event.html(data);
-                });
+                getEvent(response.eid);
             });
         };
         
@@ -148,7 +151,12 @@
         
         return this;
  
+        function getEvent(eid){
+        $.get( "ajax/event.php",{ eid:eid }, function( data ) {
+                    $event.show();
+                    $event.html(data);
+        });
+        }
     };
- 
 }( jQuery ));
  
