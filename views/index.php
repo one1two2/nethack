@@ -73,7 +73,7 @@
             </div>
             
             <div id="login">
-                <div class="fb-login-button" data-max-rows="5" data-size="xlarge" data-show-faces="true" data-auto-logout-link="true"></div>
+                <div class="fb-login-button" data-max-rows="1" data-size="xlarge" data-show-faces="false" data-auto-logout-link="true"></div>
             </div>
         <div class="clear"></div>
     </div>
