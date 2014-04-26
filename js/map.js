@@ -3,16 +3,45 @@
     
  
     $.fn.map = function() {
-        
+
         var map;
         var autocomplete;
-        var markers=[];
         var infobox=new InfoBox();
+        var semafor=false;
+        var markers=Marker();
+        
+        function Marker(){
+            var markers={};
+            var count=0;
+            
+            var obj={};
+            obj.addMarker=function(response){
+                if(markers.hasOwnProperty(response.id)===false){
+                    var marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(response.latitude,response.longitude),
+                        map: map,
+                        title: response.name
+                    });
+                    
+                    markers[response.id]=marker;
+                    count++;
+                }
+                else{
+                    marker=markers[response.id];
+                }
+                return marker;
+            }
+            obj.count=function(){
+                return count;
+            }
+            return obj;
+        }
+        
+        function init(){
  
-        function initialize() {
-        var mapOptions = {
-            center: new google.maps.LatLng(-34.397, 150.644),
-            zoom: 13
+            var mapOptions = {
+                center: new google.maps.LatLng(-34.397, 150.644),
+                zoom: 13
             };
             map = new google.maps.Map(document.getElementById("map"),mapOptions);
             
@@ -21,9 +50,13 @@
                 navigator.geolocation.getCurrentPosition(function(position) {
                   var initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
                   map.setCenter(initialLocation);
+                  getEvents();
                 }, function() {
                   handleNoGeolocation(browserSupportFlag);
                 });
+              }
+              else{
+                  getEvents();
               }
               
                // Create the search box and link it to the UI element.
@@ -50,35 +83,43 @@
                   map.setZoom(13);  
                 }
             });
+            
+            google.maps.event.addListener(map, 'bounds_changed', function() {
+                getEvents();
+            });
         }
         
         function getEvents(){
+            if(semafor===false){
+                semafor=true;
+                setTimeout(function(){
+                    _getEvents();
+                    semafor=false;
+                },1000);
+            }
+        }
+        
+        function _getEvents(){
+            var center=map.getCenter();
+            
             var request=$.ajax({
                 url: "ajax/events.php",
-                dataType: "json"
+                dataType: "json",
+                type:'get',
+                data: {lat:center.lat(),lng:center.lng(),r:50}
             });
             
             request.done(function (response){
                 console.log(response);
                 
                 for(var i=0;i<response.length;i++){
-                    var marker = new google.maps.Marker({
-                        position: new google.maps.LatLng(response[i].latitude,response[i].longitude),
-                        map: map,
-                        title: response[i].name
-                    });
-                    marker.clickMarker(response[i]);
-                    //markerClick(response[i]);
                     
-                    markers.push(marker);
+                    var marker=markers.addMarker(response[i]);
+                    marker.clickMarker(response[i]);
                 }
                 
-                
+                console.log(markers.count());
             });
-        }
-        
-        function markerClick(response){
-           
         }
         
         google.maps.Marker.prototype.clickMarker=function(response){
@@ -92,11 +133,9 @@
             });
             
         }
-         
         
-        google.maps.event.addDomListener(window, 'load', initialize);
+        init();
         
-        getEvents();
         
         return this;
  
