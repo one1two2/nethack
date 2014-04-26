@@ -9,6 +9,7 @@
         var infobox=new InfoBox();
         var semafor=false;
         var markers=Marker();
+        var $panel=$("#panel");
         
         function Marker(){
             var markers={};
@@ -124,15 +125,9 @@
         
         google.maps.Marker.prototype.clickMarker=function(response){
             google.maps.event.addListener(this, 'click', function() {
-                var options={
-                    content: response.name
-                };
-                
-                infobox.setOptions(options);
-                infobox.open(map,this);      
+                $panel.html(response.name);
             });
-            
-        }
+        };
         
         init();
         

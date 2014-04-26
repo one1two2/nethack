@@ -23,6 +23,8 @@ if(array_key_exists('lat', $_GET)===true && array_key_exists('lat', $_GET)===tru
     //$pointLat=$_GET['lat'];
     //$pointLng=$_GET['lng'];
     
+    //echo$pointLat.' | '.$pointLng.' | '.$radius;
+    
     $query='SELECT *, 111.045 * DEGREES(ACOS(COS(RADIANS('.$pointLat.'))
                 * COS(RADIANS(latitude))
                 * COS(RADIANS('.$pointLng.') - RADIANS(longitude))
@@ -35,10 +37,13 @@ if(array_key_exists('lat', $_GET)===true && array_key_exists('lat', $_GET)===tru
                AND longitude
                 BETWEEN '.$pointLng.' - ('.$radius.' / (111.045 * COS(RADIANS('.$pointLat.'))))
                     AND '.$pointLng.' + ('.$radius.' / (111.045 * COS(RADIANS('.$pointLat.'))))
-             ORDER BY distdance_in_km';
+             ORDER BY distance_in_km';
+    //echo $query;
     $result=mysql_query($query);
     $array=array();
     while($w=mysql_fetch_assoc($result)){
+        $w['html']=getView('events',$w);
+        
         $array[]=$w;
     }
 
