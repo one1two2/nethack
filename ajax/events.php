@@ -35,7 +35,7 @@ if(array_key_exists('lat', $_GET)===true && array_key_exists('lat', $_GET)===tru
                AND longitude
                 BETWEEN '.$pointLng.' - ('.$radius.' / (111.045 * COS(RADIANS('.$pointLat.'))))
                     AND '.$pointLng.' + ('.$radius.' / (111.045 * COS(RADIANS('.$pointLat.'))))
-             ORDER BY distance_in_km';
+             ORDER BY distdance_in_km';
     $result=mysql_query($query);
     $array=array();
     while($w=mysql_fetch_assoc($result)){
