@@ -2,7 +2,7 @@
     
     
  
-    $.fn.map = function() {
+    $.fn.events_map = function() {
 
         var map;
         var autocomplete;
@@ -13,6 +13,7 @@
         var $events=$("#panel_events");
         var $event=$("#panel_event");
         var $select=$("#select");
+        var $filter=$("#filter");
         
         $( document ).ready(function() {
             $event.on("click",'a.zamknij',function(){
@@ -24,10 +25,14 @@
                 getEvents();
                 return false;
             });
-        });
-        $( document ).ready(function() {
+            
             $events.on("click",'a.wiecej',function(){
                 getEvent($(this).attr('eid'));
+                return false;
+            });
+            
+            $events.on("click",'#filter-switch',function(){
+                $filter.toggle();
                 return false;
             });
         });
@@ -60,7 +65,6 @@
         }
         
         function init(){
- 
             var mapOptions = {
                 center: new google.maps.LatLng(-34.397, 150.644),
                 zoom: 13
@@ -107,7 +111,7 @@
             });
             
             google.maps.event.addListener(map, 'bounds_changed', function() {
-                getEvents();
+                //getEvents();
             });
         }
         

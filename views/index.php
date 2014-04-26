@@ -23,7 +23,7 @@
             }
             
             $( document ).ready(function() {
-                $("#map").map();
+                $("#map").events_map();
                 $( "#date_start" ).datepicker();
                 $( "#date_end" ).datepicker();
                 
@@ -75,6 +75,11 @@
             <div id="map">
 
             </div>
+            
+            <div id="logo">
+                <img src="logo.png" alt="logo" />
+            </div>
+            
             <div id="panel">
                 <div id="panel_events">
                     <select id="select">
@@ -86,12 +91,13 @@
                         <?php endif; ?>
                     </select>
                     <div id="filter">
-                        <input id="date_start" name="date_start" type="text" />
-                        <input id="date_end" name="date_end" type="text" />
+                        <input id="date_start" name="date_start" type="text" value="od kiedy" />
+                        <input id="date_end" name="date_end" type="text"  value="do kiedy" /><br />
                         
                         <label id="radius"></label>
                         <div id="slider-radius"></div>
                     </div>
+                    <a href="#" id="filter-switch">Otwórz filtry</a>
                     
                     <div id="events_list">
                         
