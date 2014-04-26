@@ -17,7 +17,7 @@ include 'datatypes/user.php';
 mysql_connect(MYSQL_HOST, MYSQL_LOGIN, MYSQL_PASS);
 mysql_select_db(MYSQL_DB);
 
-define('PATH', $_SERVER['DOCUMENT_ROOT'].'/nethack/');
+
 
 function getView($view,$params=array()){
     ob_start();
