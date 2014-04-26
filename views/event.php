@@ -12,8 +12,8 @@
         <?php endif; ?>
         <p>
             <h4>Szczegóły miejsca</h4>
-            <?= $params['street'] ?><br>
-            <?= $params['city'].' '.$params['zip'] ?>
+            <?= $params['location_street'] ?><br>
+            <?= $params['location_city'].' '.$params['location_zip'] ?>
         </p>
     </div>
 </div>
