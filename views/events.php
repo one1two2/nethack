@@ -1,5 +1,5 @@
 
-<div class="event" eid="<?= $params['eid'] ?>">
+<div class="event" eid="<?= $params['eid'] ?>"  style="cursor:pointer">
     <h3><?=$params['name']?></h3>
     <div class="eventsmallpicture">
         <img src="<?= $params['pic'] ?>"/>
