@@ -52,16 +52,26 @@
 
             </div>
             <div id="panel">
-                
-                <select>
-                    <option value ="popularity" <?php if(!$user_id): ?> selected="true" <?php endif; ?> >Popularność</option>
-                    <option value ="date">Data</option>
-                    <option value ="nearest">Najbliższe</option>
-                    <?php if($user_id > 0): ?>
-                        <option value ="match" selected="true">Dopasowane</option>
-                    <?php endif; ?>
-                </select>
+                <div id="panel_events">
+                    <select>
+                        <option value ="popularity" <?php if(!$user_id): ?> selected="true" <?php endif; ?> >Popularność</option>
+                        <option value ="date">Data</option>
+                        <option value ="nearest">Najbliższe</option>
+                        <?php if($user_id > 0): ?>
+                            <option value ="match" selected="true">Dopasowane</option>
+                        <?php endif; ?>
+                    </select>
+                    <div id="events_list">
+                        
+                    </div>
+                </div>
             </div>
+            
+            
+            <div id="panel_event">
+                    
+            </div>
+            
             <div id="login">
                 <div class="fb-login-button" data-max-rows="5" data-size="xlarge" data-show-faces="true" data-auto-logout-link="true"></div>
             </div>

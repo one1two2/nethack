@@ -25,6 +25,20 @@ body, html, head,div{
     padding:20px;
     background-color: #FFF;
 }
+#panel_event{
+    display: none;
+    padding:20px;
+    background-color: #FFF;
+    border:7px solid #CCCCCC;
+    position: absolute;
+    width:500px;
+    top:150px;
+    height:60%;
+    left:0;
+    right:0;
+    margin-left:auto;
+    margin-right:auto;
+}
 #location{
     position: absolute;
     top:50px;
@@ -53,4 +67,11 @@ body, html, head,div{
 
 .clear{
     clear:both;
+}
+
+
+#event .zamknij{
+    position: absolute;
+    right:10px;
+    top:10px;
 }

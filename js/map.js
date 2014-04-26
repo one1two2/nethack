@@ -9,7 +9,16 @@
         var infobox=new InfoBox();
         var semafor=false;
         var markers=Marker();
-        var $panel=$("#panel");
+        
+        var $events=$("#panel_events");
+        var $event=$("#panel_event");
+        
+        $( document ).ready(function() {
+            $event.on("click",'a.zamknij',function(){
+                $event.hide();
+                return false;
+            });
+        });
         
         function Marker(){
             var markers={};
@@ -113,10 +122,12 @@
             request.done(function (response){
                 console.log(response);
                 
+                var $list=$("#events_list").html('');
                 for(var i=0;i<response.length;i++){
                     
                     var marker=markers.addMarker(response[i]);
                     marker.clickMarker(response[i]);
+                    $list.append(response[i].html);
                 }
                 
                 console.log(markers.count());
@@ -125,7 +136,10 @@
         
         google.maps.Marker.prototype.clickMarker=function(response){
             google.maps.event.addListener(this, 'click', function() {
-                $panel.html(response.name);
+                $.get( "ajax/event.php",{ eid:response.eid }, function( data ) {
+                    $event.show();
+                    $event.html(data);
+                });
             });
         };
         
