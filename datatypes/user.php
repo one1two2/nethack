@@ -12,7 +12,7 @@
  * @author Konrad
  */
 class user {
-    private $uid;
+    public $uid;
     private $location_id;
     private $date_registred;
     private $first_name;
@@ -26,6 +26,31 @@ class user {
         $result = mysql_query($sql);
         $num_rows = mysql_num_rows($result);
         if($num_rows === 0){
+            //$user_profile = $facebook->api('/me','GET');
+            
+            
+            try {
+                $user_profile = $facebook->api('/me');
+                /*echo "<pre>";
+                var_dump($user_profile);
+                echo "</pre>";*/
+                $this->uid = $uid;
+                $this->birthday = 0;
+                $this->email = "";
+                $this->first_name = $user_profile['first_name'];
+                $this->second_name = $user_profile['last_name'];
+                $this->location_id = $user_profile['location']['id'];
+                $this->date_registred = time();
+                $sql = 'INSERT INTO user (uid,location_id,date_registred,first_name,second_name)'
+                    . ' VALUES ('.$this->uid.','.$this->location_id.','.$this->date_registred.',"'.$this->first_name.'","'.$this->second_name.'")';
+            } catch (FacebookApiException $e) {
+                echo '<pre>'.htmlspecialchars(print_r($e, true)).'</pre>';
+            }
+            
+            
+            //echo $sql;
+            mysql_query($sql);
+        }else{
             $row = mysql_fetch_array($result);
             $this->uid = $row['uid'];
             $this->location_id = $row['location_id'];
@@ -34,22 +59,6 @@ class user {
             $this->second_name = $row['second_name'];
             $this->birthday = $row['birthday'];
             $this->email = $row['email'];
-        }else{
-            $user_profile = $facebook->api('/me','GET');
-            /*echo "<pre>";
-            var_dump($user_profile);
-            echo "</pre>";*/
-            $this->uid = $uid;
-            $this->birthday = 0;
-            $this->email = "";
-            $this->first_name = $user_profile['first_name'];
-            $this->second_name = $user_profile['last_name'];
-            $this->location_id = $user_profile['location']['id'];
-            $this->date_registred = time();
-            $sql = 'INSERT INTO user (uid,location_id,date_registred,first_name,second_name)'
-                . ' VALUES ('.$this->uid.','.$this->location_id.','.$this->date_registred.',"'.$this->first_name.'","'.$this->second_name.'")';
-            echo $sql;
-            mysql_query($sql);
         }
     }
 }

@@ -49,7 +49,15 @@
 
             </div>
             <div id="panel">
-                <div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="true"></div>
+                <div class="fb-login-button" data-max-rows="5" data-size="xlarge" data-show-faces="true" data-auto-logout-link="true"></div>
+                <select>
+                    <option value ="popularity" <?php if(!$user_id): ?> selected="true" <?php endif; ?> >Popularność</option>
+                    <option value ="date">Data</option>
+                    <option value ="nearest">Najbliższe</option>
+                    <?php if($user_id > 0): ?>
+                        <option value ="match" selected="true">Dopasowane</option>
+                    <?php endif; ?>
+                </select>
             </div>
         <div class="clear"></div>
     </div>
