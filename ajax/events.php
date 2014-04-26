@@ -20,6 +20,15 @@ if(array_key_exists('lat', $_GET)===true && array_key_exists('lat', $_GET)===tru
     $pointLat=filter_input(INPUT_GET, 'lat', FILTER_VALIDATE_FLOAT);
     $pointLng=filter_input(INPUT_GET, 'lng', FILTER_VALIDATE_FLOAT);
     $radius=filter_input(INPUT_GET, 'r', FILTER_VALIDATE_INT);
+    $sort=filter_input(INPUT_GET, 'r', FILTER_SANITIZE_STRING);
+    
+    $order_by='attending_count';
+    if($sort==='date'){
+        $order_by='start_time';
+    }
+    else if($sort==='nearest'){
+         $order_by='distance_in_km';
+    }
     //$pointLat=$_GET['lat'];
     //$pointLng=$_GET['lng'];
     
@@ -37,7 +46,7 @@ if(array_key_exists('lat', $_GET)===true && array_key_exists('lat', $_GET)===tru
                AND longitude
                 BETWEEN '.$pointLng.' - ('.$radius.' / (111.045 * COS(RADIANS('.$pointLat.'))))
                     AND '.$pointLng.' + ('.$radius.' / (111.045 * COS(RADIANS('.$pointLat.'))))
-             ORDER BY distance_in_km';
+             ORDER BY '.$order_by;
     //echo $query;
     $result=mysql_query($query);
     $array=array();

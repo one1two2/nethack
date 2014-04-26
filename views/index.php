@@ -1,7 +1,10 @@
 <html>
     <head>
         <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="jquery-ui-1.10.4/css/blitzer/jquery-ui-1.10.4.custom.min.css" />
+        <meta charset="utf-8">
         <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="jquery-ui-1.10.4/js/jquery-ui-1.10.4.custom.min.js"></script>
         <script type="text/javascript"
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYMaScAZ6rluB4cgD__IZkIWMMIMxJFZ0&sensor=true&libraries=places">
         </script>
@@ -15,8 +18,29 @@
     <body>
         <script type='text/javascript'>
             
+            function updateRadius(){
+                $( "#radius" ).text($( "#slider-radius" ).slider( "value" )+' km'  );
+            }
+            
             $( document ).ready(function() {
                 $("#map").map();
+                $( "#date_start" ).datepicker();
+                $( "#date_end" ).datepicker();
+                
+                $( "#slider-radius" ).slider({
+                    range: "min",
+                    min: 0,
+                    max: 100,
+                    value: 50,
+                    slide: function( event, ui ) {
+                      updateRadius();
+                    }
+                });
+                updateRadius();
+                
+                
+                
+                
             });
             
         </script>
@@ -53,7 +77,7 @@
             </div>
             <div id="panel">
                 <div id="panel_events">
-                    <select>
+                    <select id="select">
                         <option value ="popularity" <?php if(!$user_id): ?> selected="true" <?php endif; ?> >Popularność</option>
                         <option value ="date">Data</option>
                         <option value ="nearest">Najbliższe</option>
@@ -61,6 +85,14 @@
                             <option value ="match" selected="true">Dopasowane</option>
                         <?php endif; ?>
                     </select>
+                    <div id="filter">
+                        <input id="date_start" name="date_start" type="text" />
+                        <input id="date_end" name="date_end" type="text" />
+                        
+                        <label id="radius"></label>
+                        <div id="slider-radius"></div>
+                    </div>
+                    
                     <div id="events_list">
                         
                     </div>
