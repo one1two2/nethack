@@ -1,4 +1,12 @@
-<div class="event">
+<div id="event">
     <h3><?=$params['name']?></h3>
-    <p><?=$params['description']?></p>
+    <div class="eventsmallpicture">
+        <img src="<?= $params['pic'] ?>"/>
+    </div>
+    <div class="eventsmallinfo">
+        
+        <p><?= date('j.n.Y',strtotime($params['start_time'])); ?>, <?= date('j.n.Y',strtotime($params['end_time'])); ?></p>
+        <p>Uczestników <?= $params['attending_count'] ?></p>
+        <p><?= substr($params['description'],0,50); ?> <a href="#">więcej</a></p>
+    </div>
 </div>

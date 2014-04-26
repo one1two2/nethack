@@ -75,3 +75,27 @@ body, html, head,div{
     right:10px;
     top:10px;
 }
+.eventsmallpicture {
+    float: left;
+}
+#event h3, #event h4, #event p{
+    -webkit-margin-before: 5px;
+    -webkit-margin-after: 5px;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+}
+#event p{
+    font-size: 13px;
+}
+#event .eventdetails h3, #event .eventdetails h4, #event .eventdetails p{
+    -webkit-margin-before: 10px;
+    -webkit-margin-after: 10px;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+}
+#event .eventdetails p {
+    font-size: 15px;
+}
+.eventsmallinfo {
+    float: right;
+}
