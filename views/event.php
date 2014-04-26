@@ -1,4 +1,3 @@
-
 <?php
     $description = str_replace('\n', '<br>', $params['description']);
     $description = wordwrap($description, 600," <a class='moredescription' href='#'>więcej</a><br>");

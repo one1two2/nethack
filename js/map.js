@@ -10,6 +10,8 @@
         var semafor=false;
         var markers=Marker();
         
+        var filters=Filter();
+        
         var $events=$("#panel_events");
         var $event=$("#panel_event");
         var $select=$("#select");
@@ -22,7 +24,8 @@
             });
             
             $select.change(function(){
-                getEvents();
+                markers.filter($(this).val());
+                //getEvents();
                 return false;
             });
             
@@ -38,6 +41,9 @@
             
             $events.on("mouseenter",'.event',function() {
                 markers.highlightMarker($(this).attr('eid'));
+            });
+            $events.on("click",'.event',function() {
+                getEvent($(this).attr('eid'));
             });
             $events.on("mouseleave",'.event',function() {
                 markers.unhighlightMarker($(this).attr('eid'));
@@ -56,7 +62,7 @@
         function Marker(){
             var markers={};
             var count=0;
-            var events={};
+            var events=[];
             
             var obj={};
             obj.addMarker=function(response){
@@ -68,8 +74,10 @@
                         icon: 'http://maps.google.com/mapfiles/kml/paddle/red-stars.png'
                     });
                     
+                    response.attending_count=parseInt(response.attending_count);
+                    
                     markers[response.eid]=marker;
-                    events[response.eid]=response;
+                    events.push(response);
                     count++;
                 }
                 else{
@@ -95,6 +103,13 @@
                 markers[eid].setIcon('http://maps.google.com/mapfiles/kml/paddle/red-stars.png');
             };
             
+            obj.filter=function(field){
+                events.sort(filters[field]);
+                console.log(events);
+                
+                obj.showEvents();
+            };
+            
             
             
             obj.count=function(){
@@ -103,10 +118,38 @@
             return obj;
         }
         
+        function Filter(){
+            var obj={};
+            
+            obj.date=function(a,b){
+                if (a.start_time < b.start_time)
+                    return -1;
+                if (a.start_time > b.start_time)
+                   return 1;
+                return 0;
+            }
+            obj.popularity=function(a,b){
+                if (a.attending_count > b.attending_count)
+                    return -1;
+                if (a.attending_count < b.attending_count)
+                   return 1;
+                return 0;
+            }
+            obj.nearest=function(a,b){
+                if (a.distance_in_km < b.distance_in_km)
+                    return -1;
+                if (a.distance_in_km > b.distance_in_km)
+                   return 1;
+                return 0;
+            }
+            
+            return obj;
+        }
+        
         function init(){
             var mapOptions = {
                 center: new google.maps.LatLng(-34.397, 150.644),
-                zoom: 13
+                zoom: 15
             };
             map = new google.maps.Map(document.getElementById("map"),mapOptions);
             
@@ -141,11 +184,11 @@
                 if (place.geometry.viewport) {
                   map.fitBounds(place.geometry.viewport);
                   map.setCenter(place.geometry.location);
-                  map.setZoom(map.getZoom()+2);  
+                  map.setZoom(map.getZoom()+3);  
 
                 } else {
                   map.setCenter(place.geometry.location);
-                  map.setZoom(13);  
+                  map.setZoom(15);  
                 }
             });
             
