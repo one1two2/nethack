@@ -16,6 +16,7 @@ include 'datatypes/user.php';
 
 mysql_connect(MYSQL_HOST, MYSQL_LOGIN, MYSQL_PASS);
 mysql_select_db(MYSQL_DB);
+mysql_query('set names utf8');
 
 
 

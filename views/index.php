@@ -91,8 +91,19 @@
                         <?php endif; ?>
                     </select>
                     <div id="filter">
+                        <select id="termin">
+                            <option value="">Następne 7 dni</option>
+                            <option value="">Następne 30 dni</option>
+                            <option value="">Ten tydzień</option>
+                            <option value="">Następny tydzień</option>
+                            <option value="">Ten weekend (pt-nd)</option>
+                            <option value="">Ten weekend (pt-nd)</option>
+                        </select>
+                        
+                        <!--
                         <input id="date_start" name="date_start" type="text" value="od kiedy" />
                         <input id="date_end" name="date_end" type="text"  value="do kiedy" /><br />
+                        -->
                         
                         <label id="radius"></label>
                         <div id="slider-radius"></div>

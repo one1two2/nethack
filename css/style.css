@@ -21,7 +21,7 @@ body, html, head,div{
     position: absolute;
     top:150px;
     left:100px;
-    width:200px;
+    width:300px;
     padding:20px;
     background-color: #FFF;
 }
@@ -46,7 +46,7 @@ body, html, head,div{
     z-index: 1000;
     padding: 5px 10px;
     font-size: 16px;
-    width:254px;
+    width:354px;
     border:7px solid #CCCCCC;
 }
 #login{

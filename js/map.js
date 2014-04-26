@@ -45,7 +45,7 @@
             obj.addMarker=function(response){
                 if(markers.hasOwnProperty(response.id)===false){
                     var marker = new google.maps.Marker({
-                        position: new google.maps.LatLng(response.latitude,response.longitude),
+                        position: new google.maps.LatLng(response.location_latitude,response.location_longitude),
                         map: map,
                         title: response.name
                     });
@@ -111,7 +111,7 @@
             });
             
             google.maps.event.addListener(map, 'bounds_changed', function() {
-                //getEvents();
+                getEvents();
             });
         }
         
