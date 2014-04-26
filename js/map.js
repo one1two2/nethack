@@ -35,6 +35,22 @@
                 $filter.toggle();
                 return false;
             });
+            
+            $events.on("mouseenter",'.event',function() {
+                markers.highlightMarker($(this).attr('eid'));
+            });
+            $events.on("mouseleave",'.event',function() {
+                markers.unhighlightMarker($(this).attr('eid'));
+            });
+            /*
+            $( ".event" ).hover(
+                function() {
+                    console.log('test');
+                    markers.highlightMarker($(this).attr('eid'));
+                }, function() {
+                    markers.unhighlightMarker($(this).attr('eid'));
+                }
+            );*/
         });
         
         function Marker(){
@@ -44,19 +60,20 @@
             
             var obj={};
             obj.addMarker=function(response){
-                if(markers.hasOwnProperty(response.id)===false){
+                if(markers.hasOwnProperty(response.eid)===false){
                     var marker = new google.maps.Marker({
                         position: new google.maps.LatLng(response.location_latitude,response.location_longitude),
                         map: map,
-                        title: response.name
+                        title: response.name,
+                        icon: 'http://maps.google.com/mapfiles/kml/paddle/red-stars.png'
                     });
                     
-                    markers[response.id]=marker;
-                    events[response.id]=response;
+                    markers[response.eid]=marker;
+                    events[response.eid]=response;
                     count++;
                 }
                 else{
-                    marker=markers[response.id];
+                    marker=markers[response.eid];
                 }
                 return marker;
             }
@@ -69,12 +86,20 @@
                     if(count>4){
                         break;
                     }
-                }
-                
-            }
+                } 
+            };
+            obj.highlightMarker=function(eid){
+                markers[eid].setIcon('http://maps.google.com/mapfiles/kml/paddle/grn-stars.png');
+            };
+            obj.unhighlightMarker=function(eid){
+                markers[eid].setIcon('http://maps.google.com/mapfiles/kml/paddle/red-stars.png');
+            };
+            
+            
+            
             obj.count=function(){
                 return count;
-            }
+            };
             return obj;
         }
         

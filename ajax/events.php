@@ -30,6 +30,8 @@ if(array_key_exists('lat', $_GET)===true && array_key_exists('lat', $_GET)===tru
     else if($sort==='nearest'){
         $order_by='distance_in_km';
     }
+    
+    $date=' AND start_time BETWEEN NOW() AND DATE_ADD(NOW(),INTERVAL 7 DAY) ';
     //$pointLat=$_GET['lat'];
     //$pointLng=$_GET['lng'];
     
@@ -47,6 +49,7 @@ if(array_key_exists('lat', $_GET)===true && array_key_exists('lat', $_GET)===tru
                AND location_longitude
                 BETWEEN '.$pointLng.' - ('.$radius.' / (111.045 * COS(RADIANS('.$pointLat.'))))
                     AND '.$pointLng.' + ('.$radius.' / (111.045 * COS(RADIANS('.$pointLat.'))))
+                        '.$date.'
              ORDER BY '.$order_by.' LIMIT 50';
     //echo $query;
     $result=mysql_query($query);

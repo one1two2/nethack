@@ -1,4 +1,4 @@
-<div id="event">
+<div class="event" eid="<?= $params['eid'] ?>">
     <h3><?=$params['name']?></h3>
     <div class="eventsmallpicture">
         <img src="<?= $params['pic'] ?>"/>
@@ -9,4 +9,5 @@
         <p>Uczestników <?= $params['attending_count'] ?></p>
         <p><?= mb_substr($params['description'],0,50); ?> <a class="wiecej" eid="<?= $params['eid'] ?>" href="#">więcej</a></p>
     </div>
+    <div class="clear"></div>
 </div>
