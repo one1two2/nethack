@@ -12,10 +12,16 @@
         
         var $events=$("#panel_events");
         var $event=$("#panel_event");
+        var $select=$("#select");
         
         $( document ).ready(function() {
             $event.on("click",'a.zamknij',function(){
                 $event.hide();
+                return false;
+            });
+            
+            $select.change(function(){
+                getEvents();
                 return false;
             });
         });
@@ -122,7 +128,7 @@
                 url: "ajax/events.php",
                 dataType: "json",
                 type:'get',
-                data: {lat:center.lat(),lng:center.lng(),r:50}
+                data: {lat:center.lat(),lng:center.lng(),r:50,sort:$select.val()}
             });
             
             request.done(function (response){
