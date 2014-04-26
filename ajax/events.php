@@ -11,6 +11,7 @@
  *
  * @author dominik
  */
+
 require_once '../init.php';
 
 
@@ -46,12 +47,14 @@ if(array_key_exists('lat', $_GET)===true && array_key_exists('lat', $_GET)===tru
                AND location_longitude
                 BETWEEN '.$pointLng.' - ('.$radius.' / (111.045 * COS(RADIANS('.$pointLat.'))))
                     AND '.$pointLng.' + ('.$radius.' / (111.045 * COS(RADIANS('.$pointLat.'))))
-             ORDER BY '.$order_by.' LIMIT 10';
+             ORDER BY '.$order_by.' LIMIT 50';
     //echo $query;
     $result=mysql_query($query);
     $array=array();
     while($w=mysql_fetch_assoc($result)){
         $w['html']=getView('events',$w);
+        //$w['html']='';
+        //$w['description']='';
         
         $array[]=$w;
     }

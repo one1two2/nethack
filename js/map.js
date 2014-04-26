@@ -40,6 +40,7 @@
         function Marker(){
             var markers={};
             var count=0;
+            var events={};
             
             var obj={};
             obj.addMarker=function(response){
@@ -51,12 +52,25 @@
                     });
                     
                     markers[response.id]=marker;
+                    events[response.id]=response;
                     count++;
                 }
                 else{
                     marker=markers[response.id];
                 }
                 return marker;
+            }
+            obj.showEvents=function(){
+                var $list=$("#events_list").html('');
+                var count=0;
+                for(var i in events){
+                    $list.append(events[i].html);
+                    count++;
+                    if(count>4){
+                        break;
+                    }
+                }
+                
             }
             obj.count=function(){
                 return count;
@@ -138,13 +152,13 @@
             request.done(function (response){
                 console.log(response);
                 
-                var $list=$("#events_list").html('');
+                
                 for(var i=0;i<response.length;i++){
-                    
                     var marker=markers.addMarker(response[i]);
                     marker.clickMarker(response[i]);
-                    $list.append(response[i].html);
                 }
+                
+                markers.showEvents();
                 
                 console.log(markers.count());
             });

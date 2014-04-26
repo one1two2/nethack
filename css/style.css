@@ -16,10 +16,10 @@ body, html, head,div{
     height: 100%;
 }
 #panel{
-    height:60%;
+    height:70%;
     border:7px solid #CCCCCC;
     position: absolute;
-    top:150px;
+    top:100px;
     left:100px;
     width:300px;
     padding:20px;
@@ -41,7 +41,7 @@ body, html, head,div{
 }
 #location{
     position: absolute;
-    top:50px;
+    top:25px;
     left:100px;
     z-index: 1000;
     padding: 5px 10px;
