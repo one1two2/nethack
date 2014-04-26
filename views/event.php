@@ -8,8 +8,8 @@
     <div class="eventdetails">
         <a class="zamknij" href="#">Zamknij</a>
         <h3><?php echo $params['name'] ?></h3>
-        <p>Data startu: <?= date('M j G Y',strtotime($params['start_time'])); ?>, Data zakończenia <?= date('M j G Y',strtotime($params['end_time'])); ?> </p>
-        <p><img src="<?= $params['pic'] ?>"/></p>
+        <p>Data startu: <?= date('M j G Y',strtotime($params['start_time'])); if(strtotime($params['end_time'])){?>, Data zakończenia <?= date('M j G Y',strtotime($params['end_time'])); } ?> </p>
+        <p><img src="<?= $params['pic_big'] ?>"/></p>
         <p>Udział bierze <?= $params['attending_count'] ?> osób</p
         
         <p><h4>Opis wydarzenia</h4>
