@@ -214,7 +214,7 @@
                 url: "ajax/events.php",
                 dataType: "json",
                 type:'get',
-                data: {lat:center.lat(),lng:center.lng(),r:50,sort:$select.val()}
+                data: {lat:center.lat(),lng:center.lng(),r:50,sort:$select.val(),duration:$("#termin").val()}
             });
             
             request.done(function (response){

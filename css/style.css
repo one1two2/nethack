@@ -24,6 +24,7 @@ body, html, head,div{
     width:250px;
     padding:20px;
     background-color: #FFF;
+    overflow: scroll;
 }
 #panel_event{
     display: none;
@@ -37,6 +38,7 @@ body, html, head,div{
     right:0;
     margin-left:auto;
     margin-right:auto;
+    overflow: scroll;
 }
 #location{
     position: absolute;
@@ -54,9 +56,7 @@ body, html, head,div{
     right:50px;
     background-color: #FFF;
 }
-#filter{
-    display: none;
-}
+
 #logo{
     position: absolute;
     width:254px;
